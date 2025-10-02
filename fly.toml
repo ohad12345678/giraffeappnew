@@ -1,4 +1,4 @@
-app = "giraffeappnew"
+app = "NEW_APP_NAME"
 primary_region = "fra"
 
 [build]
