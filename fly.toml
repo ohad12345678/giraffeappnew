@@ -1,13 +1,11 @@
-﻿primary_region = "ams"
+app = "giraffeappnew"
+primary_region = "ams"
 
 [build]
   dockerfile = "Dockerfile"
 
-[env]
-  PORT = "8000"
-
 [http_service]
-  internal_port = 8000
+  internal_port = 8080
   force_https = true
   auto_stop_machines = true
   auto_start_machines = true
