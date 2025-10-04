@@ -1,12 +1,3 @@
-# ========================================
-# Fix backend/app/main.py - CLEAN VERSION
-# ========================================
-
-cd C:\Users\ohadb\appnew\backend\app
-
-Write-Host "Creating clean main.py..." -ForegroundColor Cyan
-
-$mainPy = @'
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
@@ -24,8 +15,7 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    html_content = """
-<!DOCTYPE html>
+    html_content = """<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -66,8 +56,7 @@ def read_root():
         <p class="status">System Active</p>
     </div>
 </body>
-</html>
-    """
+</html>"""
     return HTMLResponse(content=html_content)
 
 @app.get("/api/health")
@@ -78,8 +67,3 @@ if __name__ == "__main__":
     import uvicorn
     port = int(os.environ.get("PORT", 8000))
     uvicorn.run(app, host="0.0.0.0", port=port)
-'@
-
-[System.IO.File]::WriteAllText("$PWD\main.py", $mainPy, [System.Text.Encoding]::UTF8)
-
-Write-Host "Done. File: backend\app\main.py" -ForegroundColor Green
