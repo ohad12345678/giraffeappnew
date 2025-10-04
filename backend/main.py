@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
-from fastapi..cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 import os
 
 app = FastAPI()
