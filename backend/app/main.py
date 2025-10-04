@@ -13,25 +13,45 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
 async def root():
-    return """<!DOCTYPE html>
+    html = """<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ג'ירף - איכויות מזון</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
+    <title>Giraffe</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+        }
+        h1 { color: #000; font-size: 2.5rem; }
+        .status { color: #4caf50; font-weight: bold; margin-top: 20px; }
+    </style>
 </head>
 <body>
     <div class="container">
-        <h1>🍽️ ג'ירף מטבחים</h1>
-        <p>מערכת איכויות מזון</p>
-        <p class="status">המערכת פעילה ✅</p>
+        <h1>Giraffe System</h1>
+        <p class="status">Active</p>
     </div>
-    <script src="/static/js/app.js"></script>
 </body>
 </html>"""
+    return HTMLResponse(content=html)
+
+@app.get("/api/health")
+async def health():
+    return {"status": "ok"}
 
 if __name__ == "__main__":
     import uvicorn
