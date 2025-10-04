@@ -1,46 +1,49 @@
 ﻿from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
 import os
-from datetime import datetime
 
-app = FastAPI(
-    title="Kitchen Management API",
-    version="1.0.0",
-    description="API for Kitchen Management System"
-)
+app = FastAPI()
 
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
-@app.get("/")
-async def root():
-    return {
-        "message": "Kitchen Management API",
-        "status": "active",
-        "version": "1.0.0",
-        "timestamp": datetime.now().isoformat()
-    }
-
-@app.get("/health")
-async def health_check():
-    return {
-        "status": "healthy",
-        "service": "backend",
-        "timestamp": datetime.now().isoformat()
-    }
-
-@app.get("/api/test")
-async def test_endpoint():
-    return {
-        "message": "Backend is working!",
-        "status": "success",
-        "timestamp": datetime.now().isoformat()
-    }
+@app.get("/", response_class=HTMLResponse)
+async def home():
+    return """
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Kitchen Management</title>
+        <style>
+            body {
+                margin: 0;
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                min-height: 100vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: white;
+            }
+            .container {
+                text-align: center;
+                padding: 40px;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                backdrop-filter: blur(10px);
+            }
+            h1 {
+                font-size: 4rem;
+                margin: 0;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>👋 שלום אוהד</h1>
+        </div>
+    </body>
+    </html>
+    """
 
 if __name__ == "__main__":
     import uvicorn
