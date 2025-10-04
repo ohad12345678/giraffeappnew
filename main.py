@@ -1,4 +1,4 @@
-﻿from fastapi import FastAPI
+from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
 from fastapi.middleware.cors import CORSMiddleware
 import os
@@ -15,8 +15,7 @@ app.add_middleware(
 
 @app.get("/", response_class=HTMLResponse)
 async def root():
-    html_content = """
-<!DOCTYPE html>
+    return """<!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
@@ -25,7 +24,7 @@ async def root():
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+            font-family: Arial, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             display: flex;
@@ -39,28 +38,20 @@ async def root():
             backdrop-filter: blur(10px);
             border-radius: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-            border: 1px solid rgba(255, 255, 255, 0.2);
         }
         h1 {
             color: white;
             font-size: 4rem;
             margin: 0;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-        }
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            .container { padding: 40px 30px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>👋 שלום אוהד</h1>
+        <h1>שלום אוהד</h1>
     </div>
 </body>
-</html>
-    """
-    return html_content
+</html>"""
 
 @app.get("/health")
 async def health():
